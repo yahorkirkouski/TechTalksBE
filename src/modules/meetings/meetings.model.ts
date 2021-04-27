@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
 
 export const MeetingsSchema = new mongoose.Schema({
   title: { type: String, required: false },
@@ -12,5 +13,5 @@ export interface Meeting extends mongoose.Document {
   title: string;
   notes: string;
   description: string;
-  dates: number[];
+  dates: DateTimeFormatOptions[];
 }

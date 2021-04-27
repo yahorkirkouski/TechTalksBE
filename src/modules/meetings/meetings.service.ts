@@ -14,12 +14,12 @@ export class MeetingsService {
     title: string,
     notes: string,
     description: string,
-    dates: number[],
+    dates: number[]
   ) {
     const newMeeting = new this.meetingModel({
       title,
       notes,
-      description: description,
+      description,
       dates,
     });
     const result = await newMeeting.save();
@@ -53,7 +53,7 @@ export class MeetingsService {
     title: string,
     notes: string,
     description: string,
-    dates: number[],
+    dates: Array<Intl.DateTimeFormatOptions>,
   ) {
     const updatedMeeting = await this.findMeeting(meetingId);
     if (title) {
