@@ -11,6 +11,7 @@ import {
 
 import { MeetingsService } from './meetings.service';
 import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
+import { Participants } from './meetings.model';
 
 @Controller('api/meetings')
 export class MeetingsController {
@@ -22,12 +23,14 @@ export class MeetingsController {
     @Body('notes') meetingNotes: string,
     @Body('description') meetingDesc: string,
     @Body('dates') meetingDates: number[],
+    @Body('participants') meetingParticipants: Participants[],
   ) {
     const meeting = await this.meetingsService.insertMeeting(
       meetingTitle,
       meetingNotes,
       meetingDesc,
       meetingDates,
+      meetingParticipants,
     );
     return {
       statusCode: HttpStatus.OK,
@@ -54,6 +57,7 @@ export class MeetingsController {
     @Body('notes') meetingNotes: string,
     @Body('description') meetingDesc: string,
     @Body('dates') meetingDates: Array<DateTimeFormatOptions>,
+    @Body('participants') meetingParticipants: Participants[],
   ) {
     const meeting = await this.meetingsService.updateMeeting(
       meetingId,
@@ -61,6 +65,7 @@ export class MeetingsController {
       meetingNotes,
       meetingDesc,
       meetingDates,
+      meetingParticipants,
     );
     return {
       statusCode: HttpStatus.OK,

@@ -2,10 +2,11 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Meeting } from './meetings.model';
+import { Meeting, Participants } from './meetings.model';
 
 @Injectable()
 export class MeetingsService {
+  private participants: Participants[];
   constructor(
     @InjectModel('Meeting') private readonly meetingModel: Model<Meeting>,
   ) {}
@@ -14,13 +15,15 @@ export class MeetingsService {
     title: string,
     notes: string,
     description: string,
-    dates: number[]
+    dates: number[],
+    participants: Participants[],
   ) {
     const newMeeting = new this.meetingModel({
       title,
       notes,
       description,
       dates,
+      participants,
     });
     const result = await newMeeting.save();
     return result;
@@ -34,6 +37,7 @@ export class MeetingsService {
       notes: meeting.notes,
       description: meeting.description,
       dates: meeting.dates,
+      participants: meeting.participants,
     }));
   }
 
@@ -45,6 +49,7 @@ export class MeetingsService {
       notes: meeting.notes,
       description: meeting.description,
       dates: meeting.dates,
+      participants: meeting.participants,
     };
   }
 
@@ -54,6 +59,7 @@ export class MeetingsService {
     notes: string,
     description: string,
     dates: Array<Intl.DateTimeFormatOptions>,
+    participants: Array<Participants>,
   ) {
     const updatedMeeting = await this.findMeeting(meetingId);
     if (title) {
@@ -67,6 +73,9 @@ export class MeetingsService {
     }
     if (dates) {
       updatedMeeting.dates = dates;
+    }
+    if (this.participants) {
+      updatedMeeting.participants = this.participants;
     }
     updatedMeeting.save();
     return updatedMeeting;
