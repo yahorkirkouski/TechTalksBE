@@ -2,28 +2,28 @@ import * as mongoose from 'mongoose';
 import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
 
 export const MeetingsSchema = new mongoose.Schema({
-  title: { type: String, required: false },
-  notes: { type: String, required: true },
-  description: { type: String, required: true },
+  title: { type: String, required: true },
+  notes: { type: String, required: false },
+  description: { type: String, required: false },
   dates: {
     type: {
       startDate: { type: Number, required: false },
       endDate: { type: Number, required: false },
     },
-    required: true,
+    required: false,
   },
   participants: {
     type: [
       {
         id: String,
-        fullName: { type: String, required: true },
-        lastName: { type: String, required: true },
-        isAdmin: { type: Boolean, required: true },
+        fullName: { type: String, required: false },
+        lastName: { type: String, required: false },
+        isAdmin: { type: Boolean, required: false },
         img: { type: String, required: false },
-        isSpeaker: { type: Boolean, required: true },
+        isSpeaker: { type: Boolean, required: false },
       },
     ],
-    required: true,
+    required: false,
   },
 });
 
