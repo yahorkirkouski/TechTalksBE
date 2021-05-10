@@ -1,15 +1,11 @@
 import * as mongoose from 'mongoose';
-import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
 
 export const MeetingsSchema = new mongoose.Schema({
   title: { type: String, required: true },
   notes: { type: String, required: false },
   description: { type: String, required: false },
   dates: {
-    type: {
-      startDate: { type: Number, required: false },
-      endDate: { type: Number, required: false },
-    },
+    type: [{ type: String, required: false }],
     required: false,
   },
   participants: {
@@ -32,7 +28,7 @@ export interface Meeting extends mongoose.Document {
   title: string;
   notes: string;
   description: string;
-  dates: DateTimeFormatOptions[];
+  dates: string[];
   participants: Participants[];
 }
 

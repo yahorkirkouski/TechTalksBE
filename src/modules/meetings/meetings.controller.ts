@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 
 import { MeetingsService } from './meetings.service';
-import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
 import { Participants } from './meetings.model';
 
 @Controller('api/meetings')
@@ -56,7 +55,7 @@ export class MeetingsController {
     @Body('title') meetingTitle: string,
     @Body('notes') meetingNotes: string,
     @Body('description') meetingDesc: string,
-    @Body('dates') meetingDates: Array<DateTimeFormatOptions>,
+    @Body('dates') meetingDates: Array<string>,
     @Body('participants') meetingParticipants: Participants[],
   ) {
     const meeting = await this.meetingsService.updateMeeting(

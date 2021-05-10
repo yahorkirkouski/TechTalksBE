@@ -58,7 +58,7 @@ export class MeetingsService {
     title: string,
     notes: string,
     description: string,
-    dates: Array<Intl.DateTimeFormatOptions>,
+    dates: Array<string>,
     participants: Array<Participants>,
   ) {
     const updatedMeeting = await this.findMeeting(meetingId);
